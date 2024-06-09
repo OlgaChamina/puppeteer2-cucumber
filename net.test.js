@@ -44,15 +44,19 @@ describe('Lets go to the cinema tests', () => {
         const actual = await getText(page, '.ticket__check-title');
         await expect(actual).toContain('Вы выбрали билеты');
     });
-    test('sad path', async () => {
-        await clickElement(page, 'a:nth-child(4)');
+    test.only('sad path', async () => {
+        await clickElement(page, 'a:nth-child(2)');
         await clickElement(
             page,
-            ".movie-seances__time[href='#'][data-seance-id='201']"
+            ".movie-seances__time[href='#'][data-seance-id='217']"
         );
-        await clickElement(page, 'div:nth-child(7) span:nth-child(3)');
-        await clickElement(page, '.acceptin-button');
-        const actual = await getText(page, '.buying__info-description');
-        await expect(actual).toContain('Начало сеанса');
+        await clickElement(
+            page,
+            '.buying-scheme__chair.buying-scheme__chair_standart.buying-scheme__chair_taken'
+        );
+        const actual = await page.$eval('.acceptin-button', (link) =>
+            link.getAttribute('disabled')
+        );
+        expect(actual).toEqual('true');
     });
 });

@@ -78,18 +78,22 @@ When(
     'user selected the date, movie and buying chair and trying to click on button Acceptin',
     { timeout: 70000 },
     async function () {
-        await clickElement(this.page, 'a:nth-child(4)');
+        await clickElement(this.page, 'a:nth-child(2)');
         await clickElement(
             this.page,
-            ".movie-seances__time[href='#'][data-seance-id='201']"
+            ".movie-seances__time[href='#'][data-seance-id='217']"
         );
-        await clickElement(this.page, 'div:nth-child(7) span:nth-child(3)');
+        await clickElement(
+            this.page,
+            '.buying-scheme__chair.buying-scheme__chair_standart.buying-scheme__chair_taken'
+        );
         return await clickElement(this.page, '.acceptin-button');
     }
 );
 
-Then('user sees the page to contain {string}', async function (string) {
-    const actual = await getText(this.page, '.buying__info-description');
-    const expected = await string;
-    expect(actual).contains(expected);
+Then('user sees the resirved button is not clickable', async function (string) {
+    const actual = await page.$eval('.acceptin-button', (link) =>
+        link.getAttribute('disabled')
+    );
+    expect(actual).toEqual('true');
 });

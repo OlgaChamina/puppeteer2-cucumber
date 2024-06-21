@@ -44,7 +44,7 @@ describe('Lets go to the cinema tests', () => {
         const actual = await getText(page, '.ticket__check-title');
         await expect(actual).toContain('Вы выбрали билеты');
     });
-    test.only('sad path', async () => {
+    test('sad path', async () => {
         await clickElement(page, 'a:nth-child(2)');
         await clickElement(
             page,

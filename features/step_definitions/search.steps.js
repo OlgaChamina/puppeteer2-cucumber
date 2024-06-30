@@ -91,9 +91,13 @@ When(
     }
 );
 
-Then('user sees the resirved button is not clickable', async function (string) {
-    const actual = await page.$eval('.acceptin-button', (link) =>
+Then('user sees that the button {string} is disabled', async function (string) {
+    const actual = await this.page.$eval('button.acceptin-button', (link) =>
         link.getAttribute('disabled')
     );
-    expect(actual).toEqual('true');
+    const actualText = await getText(this.page, 'button.acceptin-button');
+    expect(actual).contain('true');
+    expect(actualText).contain(string);
+
+    //expect(actual).toEqual('true');
 });

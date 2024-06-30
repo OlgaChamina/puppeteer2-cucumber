@@ -12,4 +12,4 @@ Feature: Buy a ticket
     Scenario: Try to buy a ticket to the movie Stalker
         Given user is on "/client/index.php" page
         When user selected the date, movie and buying chair and trying to click on button Acceptin
-        Then user sees that the resirved button is not clickable 'disabled'     
+        Then user sees that the button "Забронировать" is disabled   
